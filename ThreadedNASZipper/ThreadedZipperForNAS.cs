@@ -133,7 +133,15 @@ public class ThreadedZipperForNAS
                     {
                         foreach (string fileToProcess in filesToProcess)
                         {
-                            string entryName = Path.GetFileName(fileToProcess);
+                        string entryName;
+                        if (IniSettings.KeepDirectoryStructure)
+                        {
+                            string relativePath = Path.GetRelativePath(IniSettings.SourceDirectory, fileToProcess);
+                            entryName = relativePath.Replace(Path.DirectorySeparatorChar, '/');
+                        }
+                        else
+                         entryName = Path.GetFileName(fileToProcess);
+                        
                             //  string entryName = fileToProcess.Replace(IniSettings.SourceDirectory + "\\", ""); 
                             ZipArchiveEntry entry = archive.CreateEntry(entryName, IniSettings.CompressionLevel);
                             using (Stream entryStream = entry.Open())

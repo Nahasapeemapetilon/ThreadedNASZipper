@@ -51,8 +51,10 @@ namespace ThreadedNASZipper
                 return targetDirectory;
             }
         }
+        public static bool KeepDirectoryStructure { get; } = IniFileHelper.ReadIniValue(IniPath, "Zip","KeepDirectoryStructure")=="1"?true:false;
+
         public static string ZipPackageName { get; } = IniFileHelper.ReadIniValue(IniPath, "Zip", "ZipPackageName");
-        public static bool ZippingEnable { get; } = IniFileHelper.ReadIniValue(IniPath, "Zip", "Enable") == "1" ? true : false;
+       // public static bool ZippingEnable { get; } = IniFileHelper.ReadIniValue(IniPath, "Zip", "Enable") == "1" ? true : false;
 
         public static bool LoggingEnable { get; } = IniFileHelper.ReadIniValue(IniPath, "Logging", "Enable") == "1" ? true : false;
 
